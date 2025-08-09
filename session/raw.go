@@ -63,7 +63,7 @@ func (s *Session) QueryRow() *sql.Row {
 func (s *Session) QueryRows() (rows *sql.Rows, err error) {
 	defer s.CLear()
 	log.Info(s.sql.String(), s.sqlVars)
-	if rows, err = s.DB().Query(s.sql.String(), s.sqlVars); err != nil {
+	if rows, err = s.DB().Query(s.sql.String(), s.sqlVars...); err != nil {
 		log.Error(err)
 	}
 	return rows, err
