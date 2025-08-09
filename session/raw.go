@@ -2,6 +2,7 @@ package session
 
 import (
 	"database/sql"
+	"korm/clause"
 	"korm/dialect"
 	"korm/log"
 	"korm/schema"
@@ -13,6 +14,7 @@ type Session struct {
 	db       *sql.DB
 	dialect  dialect.Dialect
 	refTable *schema.Schema
+	clause   clause.Clause
 	// sql SQL statement
 	sql strings.Builder
 	// sqlVars Parameters of SQL statements
@@ -26,6 +28,7 @@ func New(db *sql.DB, dialect dialect.Dialect) *Session {
 func (s *Session) CLear() {
 	s.sql.Reset()
 	s.sqlVars = nil
+	s.clause = clause.Clause{}
 }
 
 func (s *Session) DB() *sql.DB {
