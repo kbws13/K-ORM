@@ -15,8 +15,8 @@ type Field struct {
 
 // Schema represents a table of database
 type Schema struct {
-	Mode       interface{}
-	Name       string
+	Model interface{}
+	Name  string
 	Fields     []*Field
 	FieldNames []string
 	fieldMap   map[string]*Field
@@ -29,7 +29,7 @@ func (schema *Schema) GetField(name string) *Field {
 func Parse(dest interface{}, d dialect.Dialect) *Schema {
 	modelType := reflect.Indirect(reflect.ValueOf(dest)).Type()
 	schema := &Schema{
-		Mode:     dest,
+		Model:    dest,
 		Name:     modelType.Name(),
 		fieldMap: make(map[string]*Field),
 	}
